@@ -4,7 +4,7 @@ Goal is to make the creation of vaadin GUIs as clutterless as possible:
 An example (taken from the sister project https://github.com/kindofwhat/jcrweb.git)
 
 
-builder.vlayout() {
+    builder.vlayout() {
 			tabsheet() {
 				vlayout(caption:'Login') {
 					gridlayout('loginGrid', caption:'Login', columns:2, width: 600) {
