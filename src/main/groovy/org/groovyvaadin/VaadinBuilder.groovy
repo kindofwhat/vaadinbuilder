@@ -1,36 +1,9 @@
 //see http://vgrails.googlecode.com/svn/trunk/src/groovy/org/zhakimel/vgrails/builder/VaadinBuilder.groovy
-package org.groovyvadin
+package org.groovyvaadin
 
-import java.util.Map;
-
-import groovy.util.FactoryBuilderSupport
-import org.groovyvadin.factories.*
+import org.groovyvaadin.factories.*
 
 import com.vaadin.ui.Component
-import com.vaadin.ui.Panel
-import com.vaadin.ui.HorizontalLayout
-import com.vaadin.ui.VerticalLayout
-import com.vaadin.ui.CssLayout
-
-
-
-import com.vaadin.ui.Label
-import com.vaadin.ui.TextField
-import com.vaadin.ui.Select
-import com.vaadin.ui.GridLayout
-import com.vaadin.ui.DateField
-import com.vaadin.ui.Button
-import com.vaadin.ui.NativeButton
-import com.vaadin.ui.Form
-import com.vaadin.ui.Table
-import com.vaadin.event.FieldEvents;
-import com.vaadin.terminal.ThemeResource
-import com.vaadin.ui.Window
-import com.vaadin.ui.ComboBox
-import com.vaadin.ui.SplitPanel
-import com.vaadin.ui.TabSheet
-import com.vaadin.ui.Accordion
-import com.vaadin.ui.PasswordField
 
 /**
  * Builder for Vaadin GUIs
@@ -70,9 +43,11 @@ class VaadinBuilder extends FactoryBuilderSupport {
 		registerFactory "label" , new LabelFactory()
 		registerFactory "button",new ButtonFactory()
 		registerFactory "textfield",new TextFieldFactory()
-		registerFactory "tree",new TreeFactory()
+        registerFactory "textarea",new TextAreaFactory()
+        registerFactory "tree",new TreeFactory()
 		registerFactory "table",new TableFactory()
-	}
+        registerFactory "treetable",new TreeTableFactory()
+    }
 	
 	/**
 	 * delegate to currentFactory.handleAttributes(node,attributes)

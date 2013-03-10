@@ -1,12 +1,6 @@
-package org.groovyvadin.factories
+package org.groovyvaadin.factories
 
 import com.vaadin.ui.Component
-import com.vaadin.ui.Layout
-import com.vaadin.ui.VerticalLayout
-import groovy.util.AbstractFactory;
-import groovy.util.FactoryBuilderSupport;
-
-import java.util.Map;
 
 abstract class AbstractComponentFactory extends AbstractFactory {
 	

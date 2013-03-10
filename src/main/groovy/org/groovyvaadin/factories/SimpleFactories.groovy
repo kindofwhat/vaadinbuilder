@@ -1,15 +1,8 @@
-package org.groovyvadin.factories
+package org.groovyvaadin.factories
 
-
-import com.vaadin.event.ItemClickEvent
 import com.vaadin.ui.*
 
-import groovy.lang.Closure;
-import groovy.util.AbstractFactory;
-import groovy.util.FactoryBuilderSupport;
 import com.vaadin.ui.Component
-
-import java.util.Map;
 
 interface SimpleFactories {}
 
@@ -89,10 +82,24 @@ class TextFieldFactory extends AbstractFieldFactory {
 	}
 }
 
+class TextAreaFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new TextArea()
+    }
+}
+
+
 class TreeFactory extends AbstractSelectFactory {
 	@Override protected Component createComponent() {
 		return new Tree()
 	}
+}
+
+class TreeTableFactory extends TableFactory {
+    @Override protected Component createComponent() {
+        return new TreeTable()
+    }
+
 }
 
 

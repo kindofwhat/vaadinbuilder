@@ -4,60 +4,159 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.groovyvaadin</groupId>
 	<artifactId>vaadinbuilder</artifactId>
-	<packaging>jar</packaging>
-	<version>0.1</version>
+	<packaging>bundle</packaging>
+	<version>0.2</version>
 	<name>Groovy Builder for Vaadin</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-sling-plugin</artifactId>
+                    <version>2.0.4-incubator</version>
+                    <!-- Default configuration for deploying bundles into running CQ instance -->
+                    <configuration>
+                        <slingUrl>http://localhost:8080/system/console</slingUrl>
+                        <user>admin</user>
+                        <password>admin</password>
+                    </configuration>
+                    <executions>
+                        <!-- Specify that the maven validate task automatically incorporates the use of the maven-sling-plugin to validate
+      the JSON files contained in a bundle. Validation can be skipped by setting system property 'sling.validation.skip' to true. -->
+                        <execution>
+                            <id>validate-bundle</id>
+                            <goals>
+                                <goal>validate</goal>
+                            </goals>
+                        </execution>
+                        <!-- Specify that the maven install task automatically incorporates the use of the maven-sling-plugin to deploy
+                     resulting bundles directly to a running Sling-instance Install to sling instance can be skipped by setting system property
+                     'sling.install.skip' to true. -->
+                        <execution>
+                            <id>install-bundle</id>
+                            <goals>
+                                <goal>install</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.0.1</version>
+                    <!-- Allow the plugin to extend maven with the 'bundle' packaging target -->
+                    <extensions>true</extensions>
+                    <configuration>
+                        <instructions>
+                            <Sling-Initial-Content>SLING-CONTENT;overwrite:=true</Sling-Initial-Content>
+                        </instructions>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-scr-plugin</artifactId>
+                    <version>1.7.4</version>
+                    <executions>
+                        <!-- The scr goal is bound to the generate-resources phase and will generate a single descriptor file as well
+             as meta type file for all components found in the project. -->
+                        <execution>
+                            <id>generate-scr-scrdescriptor</id>
+                            <goals>
+                                <goal>scr</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 		<plugins>
-			<plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Private-Package>org.groovyvaadin.factories.*</Private-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                    </instructions>
+                    <!--                     <wrapImportPackage>;</wrapImportPackage>  -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>maven-sling-plugin</artifactId>
+            </plugin>
+
+
+            <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.gmaven</groupId>
-				<artifactId>gmaven-plugin</artifactId>
-				<version>1.2</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-						<configuration>
-							<providerSelection>1.7</providerSelection>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.gmaven.runtime</groupId>
-						<artifactId>gmaven-runtime-1.7</artifactId>
-						<version>1.2</version>
-						<exclusions>
-							<exclusion>
-								<!-- gmaven runtime has a dependency on groovy-all v1.6 but we want 
-									1.8.0 -->
-								<groupId>org.codehaus.groovy</groupId>
-								<artifactId>groovy-all</artifactId>
-							</exclusion>
-						</exclusions>
-					</dependency>
-					<dependency>
-						<groupId>org.codehaus.groovy</groupId>
-						<artifactId>groovy-all</artifactId>
-						<version>1.8.0</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.4</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>2.0.6</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.gmaven.runtime</groupId>
+                        <artifactId>gmaven-runtime-1.7</artifactId>
+                        <version>1.4</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>org.codehaus.groovy</groupId>
+                                <artifactId>groovy-all</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <configuration>
+                            <providerSelection>1.7</providerSelection>
+
+                            <!--
+                            <sources>
+                                <fileset>
+                                    <directory>${pom.basedir}/src/test/groovy</directory>
+                                    <includes>
+                                        <include>**/*.groovy</include>
+                                    </includes>
+                                </fileset>
+                            </sources>
+                            -->
+                        </configuration>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+
+                    </execution>
+                </executions>
+
+            </plugin>
 		</plugins>
 	</build>
 
@@ -89,17 +188,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy</artifactId>
-			<version>1.8.0</version>
-			<type>jar</type>
-			<optional>false</optional>
+			<artifactId>groovy-all</artifactId>
+			<version>2.0.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin</artifactId>
-			<version>6.6.0</version>
-			<type>jar</type>
-			<optional>false</optional>
+			<version>6.8.5</version>
 		</dependency>
 	</dependencies>
 </project>
