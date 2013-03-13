@@ -1,0 +1,10 @@
+.extract/
+.idea/
+target/
+vaadinbuilder-module/target/
+vaadinbuilder-module/vaadinbuilder-module.iml
+vaadinbuilder-sampler/.extract/
+vaadinbuilder-sampler/target/
+vaadinbuilder-sampler/vaadinbuilder-sampler.iml
+vaadinbuilder.iml
+
