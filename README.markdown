@@ -1,5 +1,5 @@
 #vaadinbuilder: a Groovy Builder for Vaadin
-Goal is to make the creation of vaadin GUIs as clutterless as possible, using the excellent
+Goal is to make the creation of [Vaadin 7](https://vaadin.com) GUIs as clutterless as possible, using the excellent
 [builder](http://docs.codehaus.org/display/GROOVY/BuilderSupport) support of Groovy.
 
 ##Current State
