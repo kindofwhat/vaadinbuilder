@@ -12,6 +12,9 @@ Goal is to make the creation of [Vaadin 7](https://vaadin.com) GUIs as clutterle
 ==> open localhost:8080/sampler in your browser, start working :)
 
 
+##Sample
+<script src="https://gist.github.com/kindofwhat/5152104.js"></script>
+
 
 
 
