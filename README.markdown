@@ -13,7 +13,8 @@ Goal is to make the creation of [Vaadin 7](https://vaadin.com) GUIs as clutterle
 
 
 ##Sample
-<script src="https://gist.github.com/kindofwhat/5152104.js"></script>
+The [Sampler](https://github.com/kindofwhat/vaadinbuilder/blob/master/vaadinbuilder-sampler/src/main/groovy/org/groovyvaadin/sampler/VaadinBuilderSamplerApplication.groovy)
+App strives to showcase the usage
 
 
 
