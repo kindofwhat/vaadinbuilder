@@ -71,7 +71,7 @@ class ButtonFactory extends AbstractFieldFactory {
 		return new Button()
 	}
 	def void handleAttributeOnclick(FactoryBuilderSupport builder, Button button, Closure closure) {
-		button.addListener(closure as Button.ClickListener)
+		button.addClickListener(closure as Button.ClickListener)
 	}
 
 }
