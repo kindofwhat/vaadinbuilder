@@ -17,8 +17,37 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.groovyvaadin</groupId>
+            <artifactId>vaadinbuilder-module</artifactId>
+            <version>0.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>vaadinbuilder-sampler</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.0</version>
+                <executions>
+                    <execution>
+                        <id>tomcat-run</id>
+                        <goals>
+                            <goal>exec-war-only</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <path>sampler</path>
+                            <!-- optional only if you want to use a preconfigured server.xml file -->
+                            <serverXml>src/main/tomcatconf/server.xml</serverXml>
+                            <!-- optional values which can be configurable -->
+                            <attachArtifactClassifier>default value is exec-war but you can customize</attachArtifactClassifier>
+                            <attachArtifactClassifierType>default value is jar</attachArtifactClassifierType>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
