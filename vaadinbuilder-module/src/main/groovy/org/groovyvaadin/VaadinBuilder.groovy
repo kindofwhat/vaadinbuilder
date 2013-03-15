@@ -42,6 +42,7 @@ class VaadinBuilder extends FactoryBuilderSupport {
 		registerFactory "tabsheet" , new TabSheetFactory()
 		registerFactory "label" , new LabelFactory()
 		registerFactory "button",new ButtonFactory()
+        registerFactory "linkbutton",new LinkButtonFactory()
 		registerFactory "textfield",new TextFieldFactory()
         registerFactory "textarea",new TextAreaFactory()
         registerFactory "tree",new TreeFactory()

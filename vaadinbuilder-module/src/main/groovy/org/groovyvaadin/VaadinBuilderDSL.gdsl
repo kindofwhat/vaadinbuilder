@@ -1,0 +1,8 @@
+package org.groovyvaadin
+
+def ctx = context(ctype: "java.lang.Integer",
+        scope: scriptScope(name: "VaadinBuilder.groovy"))
+
+contributor(ctx) {
+    property name: "daysFromNow", type: "Calendar"
+}

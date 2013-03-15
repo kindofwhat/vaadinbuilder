@@ -1,0 +1,15 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
+<module>
+    <!-- Builtin Vaadin and GWT widgets -->
+    <inherits name="com.vaadin.Vaadin" />
+
+    <entry-point class='org.groovyvaadin.sampler.client.Test'/>
+
+    <!-- enable the SuperDevMode book marklets  -->
+    <add-linker name="xsiframe"/>
+    <set-configuration-property name="devModeRedirectEnabled" value="true"/>
+    <!--  enable source maps -->
+    <set-property name="compiler.useSourceMaps" value="true" />
+
+</module>

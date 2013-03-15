@@ -3,6 +3,7 @@ package org.groovyvaadin.factories
 import com.vaadin.ui.*
 
 import com.vaadin.ui.Component
+import com.vaadin.ui.themes.BaseTheme
 
 interface SimpleFactories {}
 
@@ -73,6 +74,15 @@ class ButtonFactory extends AbstractFieldFactory {
 	def void handleAttributeOnclick(FactoryBuilderSupport builder, Button button, Closure closure) {
 		button.addClickListener(closure as Button.ClickListener)
 	}
+
+}
+
+class LinkButtonFactory extends ButtonFactory{
+    @Override protected Component createComponent() {
+        Button button = new Button()
+        button.styleName= BaseTheme.BUTTON_LINK
+        return button
+    }
 
 }
 

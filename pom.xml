@@ -17,30 +17,25 @@
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
     </properties>
 	<build>
+        <!--
         <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>maven-sling-plugin</artifactId>
                     <version>2.0.4-incubator</version>
-                    <!-- Default configuration for deploying bundles into running CQ instance -->
                     <configuration>
                         <slingUrl>http://localhost:8080/system/console</slingUrl>
                         <user>admin</user>
                         <password>admin</password>
                     </configuration>
                     <executions>
-                        <!-- Specify that the maven validate task automatically incorporates the use of the maven-sling-plugin to validate
-      the JSON files contained in a bundle. Validation can be skipped by setting system property 'sling.validation.skip' to true. -->
                         <execution>
                             <id>validate-bundle</id>
                             <goals>
                                 <goal>validate</goal>
                             </goals>
                         </execution>
-                        <!-- Specify that the maven install task automatically incorporates the use of the maven-sling-plugin to deploy
-                     resulting bundles directly to a running Sling-instance Install to sling instance can be skipped by setting system property
-                     'sling.install.skip' to true. -->
                         <execution>
                             <id>install-bundle</id>
                             <goals>
@@ -54,7 +49,6 @@
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>2.0.1</version>
-                    <!-- Allow the plugin to extend maven with the 'bundle' packaging target -->
                     <extensions>true</extensions>
                     <configuration>
                         <instructions>
@@ -68,8 +62,6 @@
                     <artifactId>maven-scr-plugin</artifactId>
                     <version>1.7.4</version>
                     <executions>
-                        <!-- The scr goal is bound to the generate-resources phase and will generate a single descriptor file as well
-             as meta type file for all components found in the project. -->
                         <execution>
                             <id>generate-scr-scrdescriptor</id>
                             <goals>
@@ -80,8 +72,9 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        -->
 		<plugins>
-
+            <!--
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
@@ -95,14 +88,13 @@
                         <Private-Package>org.groovyvaadin.factories.*</Private-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
-                    <!--                     <wrapImportPackage>;</wrapImportPackage>  -->
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>maven-sling-plugin</artifactId>
             </plugin>
-
+-->
 
             <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -263,6 +255,12 @@
             <artifactId>vaadin-client</artifactId>
             <version>${vaadin.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client-compiler</artifactId>
+            <version>${vaadin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
