@@ -21,3 +21,15 @@ vlayout() {
         }
     }
 }
+
+def login() {
+   builder.components.login.enabled=false
+    builder.components.logout.enabled=true
+
+}
+
+def logout() {
+    builder.components.login.enabled=true
+    builder.components.logout.enabled=false
+
+}

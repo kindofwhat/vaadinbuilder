@@ -56,9 +56,9 @@ vlayout() {label(caption:'hello world')}
                 sampleWindow.height='80%'
                 sampleWindow.width='80%'
                 Binding b = new Binding()
-                b.setVariable("x", myBuilder)
+                b.setVariable("builder", myBuilder)
                 GroovyShell sh = new GroovyShell(b);
-                sh.evaluate("x.${builder.components.source.value}");
+                sh.evaluate("builder.${builder.components.source.value}");
                 addWindow(sampleWindow)
 
 //                this.builder.components.target.removeAllComponents()
