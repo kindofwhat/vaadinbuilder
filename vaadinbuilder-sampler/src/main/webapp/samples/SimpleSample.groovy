@@ -1,3 +1,3 @@
 
-vlayout() { label(caption:'hello world') }
+vlayout { label(caption:'hello world') }
 

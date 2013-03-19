@@ -11,9 +11,6 @@ abstract class AbstractFieldFactory extends AbstractComponentFactory {
 	protected void handleValueOnInit(FactoryBuilderSupport builder ,value, Component component) {
 		if(value!=null) {
 			super.handleValueOnInit(builder,value,component) 
-		// TODO Groovy Auto-generated method stub
-		// Only partially implemented. Perform organize imports
-		// to properly import parameter and return types
 			if(builder.missingProperties[value]) {
 				builder.missingProperties[value].each { refComponent ->
 					println "delayed adding of propertyRef with id $value"

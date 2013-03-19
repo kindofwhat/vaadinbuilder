@@ -47,7 +47,9 @@ class VaadinBuilder extends FactoryBuilderSupport {
         registerFactory "textarea",new TextAreaFactory()
         registerFactory "tree",new TreeFactory()
 		registerFactory "table",new TableFactory()
+        registerFactory "tr", new TableRowFactory()
         registerFactory "treetable",new TreeTableFactory()
+        autoRegisterNodes()
     }
 	
 	/**
