@@ -16,6 +16,10 @@ Goal is to make the creation of [Vaadin 7](https://vaadin.com) GUIs as clutterle
 The [Sampler](https://github.com/kindofwhat/vaadinbuilder/blob/master/vaadinbuilder-sampler/src/main/groovy/org/groovyvaadin/sampler/VaadinBuilderSamplerApplication.groovy)
 App strives to showcase the usage
 
+##Online Demo
+The [Sampler](https://github.com/kindofwhat/vaadinbuilder/blob/master/vaadinbuilder-sampler/src/main/groovy/org/groovyvaadin/sampler/VaadinBuilderSamplerApplication.groovy)
+running on [CloudBees] (http://vaadinbuilder.kindofwhat.cloudbees.net/)  (might be a little outdated)
+
 
 
 

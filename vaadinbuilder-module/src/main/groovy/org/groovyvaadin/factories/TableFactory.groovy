@@ -86,9 +86,7 @@ class TableFactory extends AbstractSelectFactory {
         if(values[0])  {
             values[0].eachWithIndex { cell, idx ->
                 table.addContainerProperty(idx, cell.class, null);
-
             }
-
             values.eachWithIndex { row, idx->table.addItem(row as Object[], idx) }
         }
 
