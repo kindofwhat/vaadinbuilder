@@ -1,4 +1,4 @@
-vlayout {
+hlayout {
     table (header:['first', 'second']){
         (0..5).each { idx ->
             tr {
@@ -8,4 +8,11 @@ vlayout {
 
         }
     }
+    table (header:['first', 'second', 'third'], values:[
+            ['one', 2, true],
+            ['one', 2, true],
+            ['one', 2, true],
+            ['one', 2, true],
+    ])
+
 }
