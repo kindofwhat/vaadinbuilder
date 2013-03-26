@@ -7,6 +7,7 @@
  */
 package org.groovyvaadin.sampler
 
+import com.vaadin.annotations.Theme
 import com.vaadin.server.FileResource
 import com.vaadin.server.VaadinRequest
 import com.vaadin.server.VaadinService
@@ -17,12 +18,14 @@ import com.vaadin.ui.VerticalLayout
 import com.vaadin.ui.Window
 import org.groovyvaadin.VaadinBuilder
 
+
+@Theme('builder')
 class VaadinBuilderSamplerApplication extends UI {
     private VaadinBuilder builder
 
     @Override
     protected void init(VaadinRequest request) {
-        VerticalLayout root = new VerticalLayout()
+        VerticalLayout root = new VerticalLayout(spacing: 10)
         setContent(root)
         String basepath = VaadinService.current.baseDirectory.absolutePath
         FileResource samplesDir = new FileResource(new File(basepath+'/samples'))
@@ -31,13 +34,15 @@ class VaadinBuilderSamplerApplication extends UI {
         builder.vlayout(spacing: 10) {
             hlayout(spacing:10) {
                 samplesDir.sourceFile.eachFile { sample ->
-                    linkbutton  (caption: sample.name, onclick: { this.builder.components.source.value = sample.text})
+                    linkbutton  (caption: sample.name, onclick: { c.source.value = sample.text})
                 }
 
             }
             textarea('source', height: '500', width: '800', caption: 'Builder Input:', value: '''
 //Choose a sample or start typing away
-vlayout() {label(caption:'hello world')}
+vlayout() {
+    label(caption:'hello world')
+}
 
 
 
@@ -50,7 +55,8 @@ vlayout() {label(caption:'hello world')}
             button(caption: 'Create UI', onclick: {
                 Window sampleWindow= new Window("VaadinBuilder sample window")
                 sampleWindow.modal=true
-                AbsoluteLayout sampleRoot = new AbsoluteLayout()
+                VerticalLayout sampleRoot = new VerticalLayout()
+
                 sampleWindow.content=sampleRoot
                 VaadinBuilder myBuilder = new VaadinBuilder(sampleRoot)
                 sampleWindow.height='80%'

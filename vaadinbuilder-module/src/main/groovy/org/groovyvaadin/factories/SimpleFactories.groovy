@@ -1,5 +1,6 @@
 package org.groovyvaadin.factories
 
+import com.vaadin.server.ExternalResource
 import com.vaadin.ui.*
 
 import com.vaadin.ui.Component
@@ -67,11 +68,22 @@ class LabelFactory extends AbstractFieldFactory {
 	}
 }
 
+class LinkFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new Link()
+    }
+    def void handleAttributeHref(FactoryBuilderSupport builder, Link link, String linkHref) {
+        link.resource=new ExternalResource(linkHref)
+    }
+
+}
+
 class ButtonFactory extends AbstractFieldFactory {
 	@Override protected Component createComponent() {
 		return new Button()
 	}
 	def void handleAttributeOnclick(FactoryBuilderSupport builder, Button button, Closure closure) {
+        closure.setProperty('c', builder.components)
 		button.addClickListener(closure as Button.ClickListener)
 	}
 
@@ -97,6 +109,26 @@ class TextAreaFactory extends AbstractFieldFactory {
         return new TextArea()
     }
 }
+
+class PasswordFieldFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new PasswordField()
+    }
+}
+
+class RichTextAreaFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new RichTextArea()
+    }
+}
+
+
+class PopupDateFieldFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new PopupDateField()
+    }
+}
+
 
 
 class TreeFactory extends AbstractSelectFactory {

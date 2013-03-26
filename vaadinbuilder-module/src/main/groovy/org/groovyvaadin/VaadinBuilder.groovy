@@ -1,6 +1,10 @@
 //see http://vgrails.googlecode.com/svn/trunk/src/groovy/org/zhakimel/vgrails/builder/VaadinBuilder.groovy
 package org.groovyvaadin
 
+import groovy.swing.SwingBuilder
+import groovy.swing.factory.BindFactory
+import groovy.swing.factory.BindGroupFactory
+import groovy.swing.factory.BindProxyFactory
 import org.groovyvaadin.factories.*
 
 import com.vaadin.ui.Component
@@ -41,26 +45,48 @@ class VaadinBuilder extends FactoryBuilderSupport {
 		registerFactory "verticalsplitpanel" , new VerticalSplitPanelFactory()
 		registerFactory "tabsheet" , new TabSheetFactory()
 		registerFactory "label" , new LabelFactory()
+        registerFactory "link" , new LinkFactory()
 		registerFactory "button",new ButtonFactory()
         registerFactory "linkbutton",new LinkButtonFactory()
 		registerFactory "textfield",new TextFieldFactory()
         registerFactory "textarea",new TextAreaFactory()
+        registerFactory "richtext",new RichTextAreaFactory()
+        registerFactory "password",new PasswordFieldFactory()
         registerFactory "tree",new TreeFactory()
 		registerFactory "table",new TableFactory()
         registerFactory "tr", new TableRowFactory()
         registerFactory "treetable",new TreeTableFactory()
-        autoRegisterNodes()
+        registerBinding()
+        this.methodMissingDelegate = { name, args ->
+            println("tried to call $name with $args")
+        }
     }
-	
-	/**
+
+    def registerBinding() {
+        this[SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID] = SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
+        BindFactory bindFactory = new BindFactory()
+        registerFactory("bind", bindFactory)
+        addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
+        registerFactory("bindProxy", new BindProxyFactory())
+        registerFactory ("bindGroup", new BindGroupFactory());
+    }
+
+    /**
 	 * delegate to currentFactory.handleAttributes(node,attributes)
 	 * @param layout
 	 * @param attributes
 	 */
 	@Override
     protected void setNodeAttributes(Object node, Map attributes) {
-		currentFactory.handleAttributes(this, node, attributes)
+		currentFactory.onHandleNodeAttributes(this, node, attributes)
 	}
+
+    @Override
+    protected Factory resolveFactory(Object name, Map attributes, Object value) {
+        Factory found = super.resolveFactory(name.toLowerCase(),attributes,value)
+        if(!found) { found = new DynamicComponentFactory()}
+        return found
+    }
 	
 }
 

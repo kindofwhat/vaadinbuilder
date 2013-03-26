@@ -1,36 +1,41 @@
+tabsheet(caption: 'All Components') {
+    hlayout(caption: 'Simple Components', spacing: true) {
+        label(caption: 'Label')
+        link(caption: 'Link (to Vaadin)', href:'http://vaadin.com')
 
-vlayout() {
-    tabsheet() {
-        vlayout(caption:'Login') {
-            gridlayout('loginGrid', caption:'Login', columns:2, width: 600) {
-                label( caption:'URL')
-                textfield('url', model:'url')
-                label(caption:'Name'); textfield('username', model:'username')
-                label(caption:'Password'); textfield('password', secret:true, model:'password')
-                label(); button('login', caption:'Login', onclick: {this.login()})
-                label(); button('logout', caption:'Logout', onclick: {this.logout()}, enabled:false)
+    }
+    hlayout(caption: 'Text Fields', spacing: true) {
+        textfield(caption: 'Text Field')
+        textArea(caption: 'Text Area')
+        password(caption: 'Pasword')
+        richtext(caption: 'Richtext')
+
+    }
+    hlayout(caption: 'Buttons', spacing: true) {
+        button(caption:'Button')
+        linkbutton(caption:'LinkButton', href:'http://vaadin.com')
+    }
+    hlayout(caption: 'Tables', spacing: true) {
+        vlayout() {
+            table (caption: ' Sample with Components and tr', header:['first', 'second']){
+                (0..5).each { idx ->
+                    tr {
+                        label(value: "this is a test$idx")
+                        button(caption: 'to be clicked')
+                    }
+
+                }
             }
-            hlayout() {
-                label('welcomeLabel')
-                richtext(caption:'richtext here')
-            }
+
         }
-        hlayout('browser', caption:'Browser', readOnly:true, width:1100) {
-            tree('browserTree', immediate:true, caption:'Browser Tree', width:200, onchange: { e-> /*println e.source;*/ this.displayNode()})
-            hlayout('nodeDetails', visible:false) {
-            }
+        vlayout()      {
+            table (caption: ' Sample with values argument',header:['first', 'second', 'third'], values:[
+                    ['one', 1, true],
+                    ['two', 11, true],
+                    ['three', 111, true],
+                    ['four', 1111, true],
+            ])
         }
     }
 }
 
-def login() {
-   builder.components.login.enabled=false
-    builder.components.logout.enabled=true
-
-}
-
-def logout() {
-    builder.components.login.enabled=true
-    builder.components.logout.enabled=false
-
-}

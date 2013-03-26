@@ -12,6 +12,7 @@ vlayout() {
             }
             hlayout() {
                 label('welcomeLabel')
+                richtext(caption:'richtext here')
             }
         }
         hlayout('browser', caption:'Browser', readOnly:true, width:1100) {

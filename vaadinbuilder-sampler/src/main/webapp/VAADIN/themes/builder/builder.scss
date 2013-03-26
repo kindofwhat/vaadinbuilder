@@ -1,5 +1,15 @@
-@import "../base/base.scss";
+@import "../reindeer/reindeer.scss";
+
+$space: 3px;
 
 @mixin builder {
-  @include base;
+  @include reindeer;
+}
+
+body >div, div.popupContent {
+  margin-left: 5px;
+}
+
+v-layout, h-layout {
+  margin: $space;
 }
