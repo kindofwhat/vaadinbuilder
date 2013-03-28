@@ -1,6 +1,7 @@
 //see http://vgrails.googlecode.com/svn/trunk/src/groovy/org/zhakimel/vgrails/builder/VaadinBuilder.groovy
 package org.groovyvaadin
 
+import com.vaadin.ui.UI
 import groovy.swing.SwingBuilder
 import groovy.swing.factory.BindFactory
 import groovy.swing.factory.BindGroupFactory
@@ -16,6 +17,7 @@ import com.vaadin.ui.Component
  */
 class VaadinBuilder extends FactoryBuilderSupport {
 	private Component rootComponent
+    private UI ui
 	def model=[:]
 	/**
 	 * holds all components which have been id'ed by the first argument, e.g. textfield('mytextfield')
@@ -23,17 +25,15 @@ class VaadinBuilder extends FactoryBuilderSupport {
 	def components=[:]
 	def missingProperties=[:]
 	private boolean attached=false
-	
-	public VaadinBuilder(Component rootComponent) {
-		this.rootComponent=rootComponent
-		register()
-	} 
-	
-	public VaadinBuilder() {
-		register()
-	}
-	
+
+    public VaadinBuilder(Component rootComponent, UI ui) {
+        this.ui=ui
+        this.rootComponent=rootComponent
+        register()
+    }
+
 	private void register() {
+        registerFactory "window", new WindowFactory(ui)
 		registerFactory "vlayout", new VerticalLayoutFactory()
 		registerFactory "hlayout", new HorizontalLayoutFactory()
 		registerFactory "gridlayout" , new GridLayoutFactory()
@@ -56,7 +56,6 @@ class VaadinBuilder extends FactoryBuilderSupport {
 		registerFactory "table",new TableFactory()
         registerFactory "tr", new TableRowFactory()
         registerFactory "treetable",new TreeTableFactory()
-        registerBinding()
         this.methodMissingDelegate = { name, args ->
             println("tried to call $name with $args")
         }

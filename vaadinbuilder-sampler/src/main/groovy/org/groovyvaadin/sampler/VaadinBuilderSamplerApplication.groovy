@@ -11,13 +11,9 @@ import com.vaadin.annotations.Theme
 import com.vaadin.server.FileResource
 import com.vaadin.server.VaadinRequest
 import com.vaadin.server.VaadinService
-import com.vaadin.ui.AbsoluteLayout
-import com.vaadin.ui.Label
 import com.vaadin.ui.UI
 import com.vaadin.ui.VerticalLayout
-import com.vaadin.ui.Window
 import org.groovyvaadin.VaadinBuilder
-
 
 @Theme('builder')
 class VaadinBuilderSamplerApplication extends UI {
@@ -25,16 +21,16 @@ class VaadinBuilderSamplerApplication extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        VerticalLayout root = new VerticalLayout(spacing: 10)
+        VerticalLayout root = new VerticalLayout()
         setContent(root)
         String basepath = VaadinService.current.baseDirectory.absolutePath
-        FileResource samplesDir = new FileResource(new File(basepath+'/samples'))
+        FileResource samplesDir = new FileResource(new File(basepath + '/samples'))
 
-        builder = new VaadinBuilder(root)
+        builder = new VaadinBuilder(root, this)
         builder.vlayout(spacing: 10) {
-            hlayout(spacing:10) {
+            hlayout(spacing: 10) {
                 samplesDir.sourceFile.eachFile { sample ->
-                    linkbutton  (caption: sample.name, onclick: { c.source.value = sample.text})
+                    linkbutton(caption: sample.name, onclick: { c.source.value = sample.text })
                 }
 
             }
@@ -53,24 +49,16 @@ vlayout() {
 //Click 'Create UI' to display your UI
 ''')
             button(caption: 'Create UI', onclick: {
-                Window sampleWindow= new Window("VaadinBuilder sample window")
-                sampleWindow.modal=true
-                VerticalLayout sampleRoot = new VerticalLayout()
-
-                sampleWindow.content=sampleRoot
-                VaadinBuilder myBuilder = new VaadinBuilder(sampleRoot)
-                sampleWindow.height='80%'
-                sampleWindow.width='80%'
+                window('showWindow', caption:'VaadinBuilder sample window', modal:true, height:'80%', width: '80%') {
+                    vlayout('showLayout')   {
+                        label(caption:'Sample Result:')
+                    }
+                }
+                VaadinBuilder myBuilder = new VaadinBuilder(builder.components.showLayout, this)
                 Binding b = new Binding()
                 b.setVariable("builder", myBuilder)
                 GroovyShell sh = new GroovyShell(b);
                 sh.evaluate("builder.${builder.components.source.value}");
-                addWindow(sampleWindow)
-
-//                this.builder.components.target.removeAllComponents()
-//                Eval.me('builder', builder, "builder.components.target.addComponent( builder.${builder.components.source.value})")
-                //Eval.xy(myBuilder, 'label(caption:\'lala\')', 'x.y')
-
             })
             vlayout('target')
         }
