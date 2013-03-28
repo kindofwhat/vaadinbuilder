@@ -128,8 +128,23 @@ class PopupDateFieldFactory extends AbstractFieldFactory {
         return new PopupDateField()
     }
 }
+class DateFieldFactory extends AbstractFieldFactory {
+    @Override protected Component createComponent() {
+        return new DateField()
+    }
+}
 
 
+class ComboBoxFactory extends AbstractSelectFactory {
+    @Override protected Component createComponent() {
+        return new ComboBox()
+    }
+
+    def void handleAttributeValues(FactoryBuilderSupport builder, ComboBox comboBox, def values)  {
+       values.eachWithIndex { value,idx -> comboBox.addItem(value)}
+    }
+
+}
 
 class TreeFactory extends AbstractSelectFactory {
 	@Override protected Component createComponent() {

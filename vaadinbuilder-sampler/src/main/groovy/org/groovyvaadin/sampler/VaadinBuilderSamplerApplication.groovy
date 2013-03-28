@@ -36,15 +36,10 @@ class VaadinBuilderSamplerApplication extends UI {
             }
             textarea('source', height: '500', width: '800', caption: 'Builder Input:', value: '''
 //Choose a sample or start typing away
+
 vlayout() {
     label(caption:'hello world')
 }
-
-
-
-
-
-
 
 //Click 'Create UI' to display your UI
 ''')

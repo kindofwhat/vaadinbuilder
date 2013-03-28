@@ -89,10 +89,6 @@ class TableFactory extends AbstractSelectFactory {
             }
             values.eachWithIndex { row, idx->table.addItem(row as Object[], idx) }
         }
-
-
-
-
     }
 
 

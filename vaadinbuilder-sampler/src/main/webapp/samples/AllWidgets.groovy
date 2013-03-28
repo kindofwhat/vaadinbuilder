@@ -4,16 +4,19 @@ tabsheet(caption: 'All Components') {
         link(caption: 'Link (to Vaadin)', href:'http://vaadin.com')
 
     }
-    hlayout(caption: 'Text Fields', spacing: true) {
+    gridlayout(columns:3, caption: 'Text Fields', spacing: true) {
         textfield(caption: 'Text Field')
         textArea(caption: 'Text Area')
         password(caption: 'Pasword')
         richtext(caption: 'Richtext')
+        datefield(caption: 'Datefield')
+        popupdatefield(caption: 'PopupDateField ')
 
     }
-    hlayout(caption: 'Buttons', spacing: true) {
+    gridlayout(columns:3, caption: 'Buttons and Select', spacing: true) {
         button(caption:'Button')
         linkbutton(caption:'LinkButton', href:'http://vaadin.com')
+        combobox(caption: 'ComboBox', values:["one", "two", "threeyea"])
     }
     hlayout(caption: 'Tables', spacing: true) {
         vlayout() {
