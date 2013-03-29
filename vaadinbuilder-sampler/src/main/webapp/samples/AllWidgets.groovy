@@ -1,4 +1,4 @@
-tabsheet(caption: 'All Components') {
+accordion(caption: 'All Components') {
     hlayout(caption: 'Simple Components', spacing: true) {
         label(caption: 'Label')
         link(caption: 'Link (to Vaadin)', href:'http://vaadin.com')

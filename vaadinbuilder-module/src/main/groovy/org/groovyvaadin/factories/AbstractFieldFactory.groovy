@@ -26,7 +26,7 @@ abstract class AbstractFieldFactory extends AbstractComponentFactory {
 		field.addListener (closure as FieldEvents.TextChangeListener)
 	}
 	def void handleAttributeOnchange(FactoryBuilderSupport builder, Field field, Closure closure) {
-		field.addListener (closure as Property.ValueChangeListener)
+		field.addValueChangeListener (closure as Property.ValueChangeListener)
 	}
 
 	def void handleAttributeModel(FactoryBuilderSupport builder, Property property, String key) {
@@ -38,7 +38,8 @@ abstract class AbstractFieldFactory extends AbstractComponentFactory {
 			 println "No component found for id $id"
 			if(!builder.missingProperties[id]) builder.missingProperties[id]=[]
 			builder.missingProperties[id]<<property
-		} else { property.setPropertyDataSource(builder.components[id])
+		} else {
+            property.setPropertyDataSource(builder.components[id])
 		}
 	}
 }

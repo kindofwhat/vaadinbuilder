@@ -19,9 +19,8 @@ class VaadinBuilder extends FactoryBuilderSupport {
 	private Component rootComponent
     private UI ui
 	def model=[:]
-	/**
-	 * holds all components which have been id'ed by the first argument, e.g. textfield('mytextfield')
-	 */
+
+    //holds all components which have been id'ed by the first argument, e.g. textfield('mytextfield')
 	def components=[:]
 	def missingProperties=[:]
 	private boolean attached=false
@@ -43,6 +42,7 @@ class VaadinBuilder extends FactoryBuilderSupport {
 		registerFactory "csslayout", new CssLayoutFactory()
 		registerFactory "horizontalsplitpanel", new HorizontalLayoutFactory()
 		registerFactory "verticalsplitpanel" , new VerticalSplitPanelFactory()
+        registerFactory "accordion",new AccordionFactory()
 		registerFactory "tabsheet" , new TabSheetFactory()
 		registerFactory "label" , new LabelFactory()
         registerFactory "link" , new LinkFactory()
@@ -62,15 +62,6 @@ class VaadinBuilder extends FactoryBuilderSupport {
         this.methodMissingDelegate = { name, args ->
             println("tried to call $name with $args")
         }
-    }
-
-    def registerBinding() {
-        this[SwingBuilder.DELEGATE_PROPERTY_OBJECT_ID] = SwingBuilder.DEFAULT_DELEGATE_PROPERTY_OBJECT_ID
-        BindFactory bindFactory = new BindFactory()
-        registerFactory("bind", bindFactory)
-        addAttributeDelegate(bindFactory.&bindingAttributeDelegate)
-        registerFactory("bindProxy", new BindProxyFactory())
-        registerFactory ("bindGroup", new BindGroupFactory());
     }
 
     /**

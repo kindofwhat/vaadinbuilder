@@ -61,6 +61,11 @@ class TabSheetFactory extends AbstractComponentFactory {
 		return new TabSheet()
 	}
 }
+class AccordionFactory extends TabSheetFactory {
+    @Override protected Component createComponent() {
+        return new Accordion()
+    }
+}
 
 class LabelFactory extends AbstractFieldFactory {
 	@Override protected Component createComponent() {
