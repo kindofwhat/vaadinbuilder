@@ -6,10 +6,8 @@ hlayout(spacing: true) {
                     label(value: "this is a test$idx")
                     button(caption: 'to be clicked')
                 }
-
             }
         }
-
     }
     vlayout()      {
         table (caption: ' Sample with values argument',header:['first', 'second', 'third'], values:[

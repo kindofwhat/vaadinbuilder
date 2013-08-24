@@ -10,7 +10,6 @@ class TableRowFactory extends AbstractItemFactory{
 
     @Override
     void setChild(FactoryBuilderSupport builder, Object parent, Object child) {
-//        parent.addItemProperty(parent.itemPropertyIds.size(), child)
         parent << child
     }
 
@@ -29,13 +28,11 @@ class TableRowFactory extends AbstractItemFactory{
     @Override
     void setParent(FactoryBuilderSupport builder, Object parent, Object child) {
             int i=0
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     protected Object createComponent() {
         return []
-//        return new PropertysetItem()
     }
 }
 
@@ -63,26 +60,22 @@ class TableFactory extends AbstractSelectFactory {
     public void setChild( FactoryBuilderSupport builder, Object parent, Object child )  {
     }
 
-    def void handleAttributeFieldFactory(FactoryBuilderSupport builder, Table table, Closure closure) {
+    void handleAttributeFieldFactory(FactoryBuilderSupport builder, Table table, Closure closure) {
         TableFieldFactory tff = new DefaultFieldFactory() {
             @Override
             public Field createField(Container container, Object itemId,
                                      Object propertyId, Component uiContext) {
                 return closure.call(itemId, propertyId)
             }
-
         }
         table.tableFieldFactory=tff
-
     }
 
-    def void handleAttributeHeader(FactoryBuilderSupport builder, Table table, List headers)  {
+    void handleAttributeHeader(FactoryBuilderSupport builder, Table table, List headers)  {
         this.headers = headers
-
-
     }
 
-    def void handleAttributeValues(FactoryBuilderSupport builder, Table table, def values)  {
+    void handleAttributeValues(FactoryBuilderSupport builder, Table table, def values)  {
         if(values[0])  {
             values[0].eachWithIndex { cell, idx ->
                 table.addContainerProperty(idx, cell.class, null);
@@ -90,7 +83,4 @@ class TableFactory extends AbstractSelectFactory {
             values.eachWithIndex { row, idx->table.addItem(row as Object[], idx) }
         }
     }
-
-
-
 }

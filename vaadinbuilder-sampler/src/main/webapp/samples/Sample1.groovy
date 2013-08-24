@@ -7,8 +7,8 @@ vlayout() {
                 textfield('url', model:'url')
                 label(caption:'Name'); textfield('username', model:'username')
                 label(caption:'Password'); textfield('password', secret:true, model:'password')
-                label(); button('login', caption:'Login', onclick: {this.login()})
-                label(); button('logout', caption:'Logout', onclick: {this.logout()}, enabled:false)
+                label(); button('login', caption:'Login', onclick: {login()})
+                label(); button('logout', caption:'Logout', onclick: {logout()}, enabled:false)
             }
             hlayout() {
                 label('welcomeLabel')
@@ -24,7 +24,7 @@ vlayout() {
 }
 
 def login() {
-   builder.components.login.enabled=false
+    builder.components.login.enabled=false
     builder.components.logout.enabled=true
 
 }

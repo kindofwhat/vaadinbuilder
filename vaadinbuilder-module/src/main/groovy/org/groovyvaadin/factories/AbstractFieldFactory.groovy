@@ -29,7 +29,7 @@ abstract class AbstractFieldFactory extends AbstractComponentFactory {
 		field.addValueChangeListener (closure as Property.ValueChangeListener)
 	}
 
-	def void handleAttributeModel(FactoryBuilderSupport builder, Property property, String key) {
+	def void handleAttributePropertySource(FactoryBuilderSupport builder, Property property, String key) {
 		property.addListener(  {event -> builder.model[key] = event.property.value} as Property.ValueChangeListener)
 	}
 
@@ -39,7 +39,7 @@ abstract class AbstractFieldFactory extends AbstractComponentFactory {
 			if(!builder.missingProperties[id]) builder.missingProperties[id]=[]
 			builder.missingProperties[id]<<property
 		} else {
-            property.setPropertyDataSource(builder.components[id])
+            property.propertyDataSource=builder.components[id]
 		}
 	}
 }
